@@ -24,7 +24,7 @@ public class ModalitaTest extends TestCase {
 
         RSAKeyGeneration.generateKeys();
 
-        Modalita modalita = new Modalita(messaggio, n);
+        Modalita modalita = new Modalita(messaggio);
 
         modalita.calcola(1, "crypt");
 
@@ -32,7 +32,7 @@ public class ModalitaTest extends TestCase {
 
         String decrypted = "";
 
-        modalita = new Modalita(encrypted, n);
+        modalita = new Modalita(encrypted);
 
         modalita.calcola(1, "decrypt");
 
@@ -51,7 +51,7 @@ public class ModalitaTest extends TestCase {
 
         RSAKeyGeneration.generateKeys();
 
-        Modalita modalita = new Modalita(messaggio, n);
+        Modalita modalita = new Modalita(messaggio);
 
         modalita.calcola(2, "crypt");
 
@@ -59,7 +59,7 @@ public class ModalitaTest extends TestCase {
 
         String decrypted = "";
 
-        modalita = new Modalita(encrypted, n);
+        modalita = new Modalita(encrypted);
 
         modalita.calcola(2, "decrypt");
 
@@ -78,7 +78,7 @@ public class ModalitaTest extends TestCase {
 
         RSAKeyGeneration.generateKeys();
 
-        Modalita modalita = new Modalita(messaggio, n);
+        Modalita modalita = new Modalita(messaggio);
 
         modalita.calcola(3, "crypt");
 
@@ -86,7 +86,7 @@ public class ModalitaTest extends TestCase {
 
         String decrypted = "";
 
-        modalita = new Modalita(encrypted, n);
+        modalita = new Modalita(encrypted);
 
         modalita.calcola(3, "decrypt");
 

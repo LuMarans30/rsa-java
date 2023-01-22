@@ -11,21 +11,10 @@ public class Modalita {
     private String[] privateKeyBob;
     private String[] publicKeyBob;
 
-    private int n;
-
     private boolean cryptdecrypt;
 
-    public Modalita(String message, int n) {
+    public Modalita(String message) {
         this.message = message;
-        this.n = n;
-    }
-
-    public int getN() {
-        return n;
-    }
-
-    public void setN(int n) {
-        this.n = n;
     }
 
     /**
@@ -39,7 +28,7 @@ public class Modalita {
      * essere "crypt" o "decrypt"
      * 
      * @param scelta
-     * @param cryptdecrypt
+     * @param opzione
      * @throws Exception
      */
     public void calcola(int scelta, String opzione) throws Exception {

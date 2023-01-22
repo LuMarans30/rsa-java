@@ -62,7 +62,7 @@ public class RSAKeyGeneration {
      * @return
      * @throws IOException
      */
-    public static BigInteger getPrimeNumber() throws IOException, InterruptedException {
+    private static BigInteger getPrimeNumber() throws IOException, InterruptedException {
 
         BigInteger p;
         QRand qrand = new QRand();
@@ -121,9 +121,9 @@ public class RSAKeyGeneration {
      * 
      * @return
      */
-    public static boolean netIsAvailable() {
+    private static boolean netIsAvailable() {
         try {
-            final URL url = new URL("http://www.google.com");
+            final URL url = new URL("https://qrng.anu.edu.au/API/jsonI.php?length=1&type=uint8");
             final URLConnection conn = url.openConnection();
             conn.connect();
             conn.getInputStream().close();

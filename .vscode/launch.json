@@ -6,15 +6,16 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Launch Current File",
+            "name": "Launch Server",
             "request": "launch",
-            "mainClass": "${file}"
+            "mainClass": "rsa.server.Server",
+            "projectName": "rsa-java-v2_fc7960a5"
         },
         {
             "type": "java",
-            "name": "Launch App",
+            "name": "Launch Client",
             "request": "launch",
-            "mainClass": "rsa.App",
+            "mainClass": "rsa.client.Client",
             "projectName": "rsa-java-v2_fc7960a5"
         },
         {

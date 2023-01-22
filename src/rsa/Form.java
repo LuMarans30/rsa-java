@@ -21,31 +21,33 @@ import com.formdev.flatlaf.*;
  * 
  * @author Andrea Marano
  */
-public class Form extends JPanel {
-    private JComboBox<String> cmbModalita;
-    private JTextArea txtMessage;
-    private JButton btnEncrypt;
-    private JButton btnDecrypt;
-    private JTextArea txtResult;
-    private JLabel jcomp5;
-    private JLabel jcomp6;
-    private JComboBox<Integer> cmbChiave;
-    private JLabel jcomp8;
+public class Form extends JFrame {
+    protected JComboBox<String> cmbModalita;
+    protected JTextArea txtMessage;
+    protected JButton btnEncrypt;
+    protected JButton btnDecrypt;
+    protected JTextArea txtResult;
+    protected JLabel jcomp5;
+    protected JLabel jcomp6;
+    protected JComboBox<Integer> cmbChiave;
+    protected JLabel jcomp8;
     private JLabel jcomp9;
     private JScrollPane jScrollPane1;
     private JScrollPane jScrollPane2;
-    private JButton btnCopyResult;
+    protected JButton btnCopyResult;
     private JComboBox<String> cmbTheme;
 
     private int N = 2048;
 
-    public Form() {
+    public Form(String title) {
         // construct preComponents
         String[] cmbModalitaItems = { "Modalità 1", "Modalità 2", "Modalità 3 (Default)" };
         Integer[] cmbChiaveItems = { 256, 512, 1024, 2048, 4096 };
         String[] cmbThemeItems = { "Seleziona tema (Default: Dark)", "Light", "Dark", "Darcula", "MacDark",
                 "MacLight",
                 "IntelliJ" };
+
+        this.setTitle(title);
 
         // construct components
         cmbModalita = new JComboBox<>(cmbModalitaItems);
@@ -72,7 +74,7 @@ public class Form extends JPanel {
         cmbTheme = new JComboBox<>(cmbThemeItems);
 
         // adjust size and set layout
-        setPreferredSize(new Dimension(950, 600));
+        setPreferredSize(new Dimension(950, 630));
         setLayout(null);
 
         // add components
@@ -105,11 +107,11 @@ public class Form extends JPanel {
         btnCopyResult.setBounds(10, 565, 925, 25);
         cmbTheme.setBounds(235, 10, 120, 25);
 
-        generaChiavi();
-
         // event handling
         cmbChiave.addActionListener(e -> {
+            setCursor(new Cursor(Cursor.WAIT_CURSOR));
             generaChiavi();
+            setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         });
 
         cmbTheme.addActionListener(e -> {
@@ -156,8 +158,6 @@ public class Form extends JPanel {
         btnEncrypt.addActionListener(e -> {
 
             cryptdecrypt("crypt");
-
-            btnDecrypt.setEnabled(true);
         });
 
         btnDecrypt.addActionListener(e -> {
@@ -166,8 +166,8 @@ public class Form extends JPanel {
         });
     }
 
-    private void generaChiavi() {
-        btnEncrypt.setEnabled(true);
+    protected void generaChiavi() {
+
         this.N = cmbChiave.getItemAt(cmbChiave.getSelectedIndex());
 
         Future<?> generateKeys = Executors.newSingleThreadExecutor().submit(() -> {
@@ -182,20 +182,33 @@ public class Form extends JPanel {
             }
         });
 
-        JOptionPane.showMessageDialog(null, "Generazione chiavi in corso...", "Informazioni",
-                JOptionPane.INFORMATION_MESSAGE);
+
+        setCursor(new Cursor(Cursor.WAIT_CURSOR));
 
         try {
             generateKeys.get();
         } catch (InterruptedException | ExecutionException e1) {
             e1.printStackTrace();
         }
+
+        setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+
     }
 
-    private void cryptdecrypt(String cryptdecrypt) {
+    protected void cryptdecrypt(String cryptdecrypt) {
+
+        Cursor wait = new Cursor(Cursor.WAIT_CURSOR);
+
+        this.setCursor(wait);
+
+        if(RSAKeyGeneration.publicKey == null || RSAKeyGeneration.privateKey == null) {
+            generaChiavi();
+            return;
+        }
+
         String message = txtMessage.getText();
 
-        Modalita modalita = new Modalita(message, this.N);
+        Modalita modalita = new Modalita(message);
 
         try {
             modalita.calcola(cmbModalita.getSelectedIndex() + 1, cryptdecrypt);
@@ -204,16 +217,11 @@ public class Form extends JPanel {
         }
 
         txtResult.setText(modalita.getResult());
+
+        this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame("RSA Crypt/Decrypt");
-
-        try {
-            frame.setIconImage(ImageIO.read(new File("assets/key.png")));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
         try {
             UIManager.setLookAndFeel(new FlatDarculaLaf());
@@ -221,8 +229,23 @@ public class Form extends JPanel {
             e.printStackTrace();
         }
 
+        JFrame frame = null;
+
+        if (args.length == 0)
+            frame = new Form("RSA");
+        else
+            frame = new rsa.client.Client(args[0]);
+
+        frame.getContentPane().add(new JPanel());
+
+        try {
+            frame.setIconImage(ImageIO.read(new File("assets/key.png")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().add(new Form());
+
         frame.pack();
         frame.setVisible(true);
     }

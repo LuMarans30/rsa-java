@@ -12,7 +12,6 @@ public class QRand implements Runnable {
     /**
      * Seed per la generazione di numeri casuali
      * volatile significa che il valore può essere modificato da più thread
-     * @see SecureRandom
      */
     public volatile long seed;
 

@@ -35,7 +35,7 @@ public class App {
 
         do {
 
-            System.out.println(ANSI_GREEN + "RSA Crypt/Decrypt" + ANSI_RESET);
+            System.out.println(ANSI_GREEN + "\nRSA Crypt/Decrypt" + ANSI_RESET);
             System.out.println(ANSI_CYAN + "-----------------" + ANSI_RESET);
             System.out.println(ANSI_YELLOW + "Seleziona la lunghezza della chiave:" + ANSI_RESET);
             System.out.println(ANSI_CYAN + "1 - 512 bit");
@@ -44,15 +44,21 @@ public class App {
             System.out.println("4 - 4096 bit" + ANSI_RESET);
             System.out.print(ANSI_YELLOW + "\n" + "Scelta: " + ANSI_RESET);
 
-            key = Integer.parseInt(System.console().readLine());
+            try {
+                key = Integer.parseInt(System.console().readLine());
 
-            if (key < 1 || key > 4)
-                System.out.println(ANSI_RED + "Scelta non valida." + ANSI_RESET);
+                if (key < 1 || key > 4)
+                    System.err.println(ANSI_RED + "\nScelta non valida." + ANSI_RESET);
+
+            } catch (Exception e) {
+                System.err.println(ANSI_RED + "\nImmetti un valore numerico." + ANSI_RESET);
+                key = 0;
+            }
 
         } while (key < 1 || key > 4);
 
         do {
-            System.out.println(ANSI_YELLOW + "Seleziona una modalità di RSA:" + ANSI_RESET);
+            System.out.println(ANSI_YELLOW + "\nSeleziona una modalità di RSA:" + ANSI_RESET);
             System.out.println(ANSI_CYAN + "1 - chiave pubblica di Alice ; chiave privata di Alice");
             System.out.println("2 - chiave privata di Bob ; chiave pubblica di Bob");
             System.out.println(
@@ -60,10 +66,16 @@ public class App {
                             + ANSI_RESET);
             System.out.print("\n" + ANSI_YELLOW + "Scelta: " + ANSI_RESET);
 
-            scelta = Integer.parseInt(System.console().readLine());
+            try {
+                scelta = Integer.parseInt(System.console().readLine());
 
-            if (scelta < 1 || scelta > 3)
-                System.out.println(ANSI_RED + "Scelta non valida." + ANSI_RESET);
+                if (scelta < 1 || scelta > 3)
+                    System.err.println(ANSI_RED + "\nScelta non valida." + ANSI_RESET);
+
+            } catch (Exception e) {
+                System.err.println(ANSI_RED + "\nImmetti un valore numerico." + ANSI_RESET);
+                key = 0;
+            }
 
         } while (scelta < 1 || scelta > 3);
 
@@ -77,9 +89,9 @@ public class App {
         if (inputString.length() > 0 && !inputString.equalsIgnoreCase("N"))
             message = inputString;
 
-        Modalita modalita = new Modalita(message, keys.get(key));
+        Modalita modalita = new Modalita(message);
 
-        RSAKeyGeneration.setN(modalita.getN());
+        RSAKeyGeneration.setN(keys.get(key));
 
         Future<?> generateKeys = Executors.newSingleThreadExecutor().submit(() -> {
 
@@ -103,7 +115,7 @@ public class App {
 
         encrypted = modalita.getResult();
 
-        modalita = new Modalita(encrypted, keys.get(key));
+        modalita = new Modalita(encrypted);
 
         modalita.calcola(scelta, "decrypt");
 
