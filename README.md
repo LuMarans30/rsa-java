@@ -1,11 +1,11 @@
 # RSA in Java
 
-![GitHub](https://img.shields.io/github/license/LuMarans30/AstralSafeServer)
-![GitHub repo size](https://img.shields.io/github/repo-size/LuMarans30/AstralSafeServer)
-![Lines of code](https://img.shields.io/tokei/lines/github/LuMarans30/AstralSafeServer)
-![GitHub issues](https://img.shields.io/github/issues/LuMarans30/AstralSafeServer)
-![Website](https://img.shields.io/website?down_message=down&up_message=online&url=https%3A%2F%2Flumarans30.github.io%2FAstralSafeServer%2F)
-![GitHub last commit](https://img.shields.io/github/last-commit/LuMarans30/AstralSafeServer)
+![GitHub](https://img.shields.io/github/license/LuMarans30/rsa-java)
+![GitHub repo size](https://img.shields.io/github/repo-size/LuMarans30/rsa-java)
+![Lines of code](https://img.shields.io/tokei/lines/github/LuMarans30/rsa-java)
+![GitHub issues](https://img.shields.io/github/issues/LuMarans30/rsa-java)
+![Website](https://img.shields.io/website?down_message=down&up_message=online&url=https%3A%2F%2Flumarans30.github.io%2Frsa-java%2F)
+![GitHub last commit](https://img.shields.io/github/last-commit/LuMarans30/rsa-java)
 
 A Java GUI/CLI application that encrypts and decrypts a string using RSA. The GUI was created using Java Swing with the flatlaf library for a better appearance; the user can choose one of several themes from the GUI app version.
 <br/>This project contains: a standalone application that performs encryption/decryption, a client, and a server.
