@@ -1,16 +1,16 @@
 # RSA in Java
 
-A GUI/CLI Java application that encrypts and decrypts a string using RSA. The GUI was made using Java Swing with the flatlaf library for a better look and feel, the user can choose one of the several themes on the GUI version.
+A Java GUI/CLI application that encrypts and decrypts a string using RSA. The GUI was created using Java Swing with the flatlaf library for a better appearance; the user can choose one of several themes from the GUI app version.
 
-This project contains: a standalone app which does encryption/decryption, a client and a server.
+This project contains: a standalone application that performs encryption/decryption, a client, and a server.
 
-The client sends a string to the server which does the encryption or decryption and returns the result.
+The client sends a string to the server that performs encryption or decryption and returns the result.
 
-The user can choose a key lenght between 512 and 8192 bits.
+The user can choose a key length between 512 and 8192 bits.
 
-Moreover the user can choose between 3 modalities where the third one is the most secure.
+In addition, the user can choose from 3 modes, the third of which is the most secure.
 
-The three modalities are:
+The three modes are:
 
 <ol>
   <li>
