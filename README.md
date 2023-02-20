@@ -28,4 +28,4 @@ The three modes are:
 
 ## Documentation
 
-The JavaDoc is available on the [github page](https://lumarans30.github.io/rsa-java) of this repository.
+The JavaDoc documentation is available on the [github page](https://lumarans30.github.io/rsa-java) of this repository.
