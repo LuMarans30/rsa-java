@@ -25,3 +25,7 @@ The three modes are:
    Bob uses his private key and Alice's public key to encrypt the message. Alice can then use her private key and Bob's public key to decrypt the message.
   </li>
 </ol>
+
+## Documentation
+
+The JavaDoc is available on the [github page](https://lumarans30.github.io/rsa-java) of this repository.
