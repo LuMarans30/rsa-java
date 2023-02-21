@@ -8,8 +8,14 @@
 ![GitHub last commit](https://img.shields.io/github/last-commit/LuMarans30/rsa-java)
 
 A Java GUI/CLI application that encrypts and decrypts a string using RSA. The GUI was created using Java Swing with the flatlaf library for a better appearance; the user can choose one of several themes from the GUI app version.
+
+## App versions
+
 <br/>This project contains: a standalone application that performs encryption/decryption, a client, and a server.
 <br/>The client sends a string to the server that performs encryption or decryption and returns the result.
+
+## Key lengths and modes
+
 <br/>The user can choose a key length between 512 and 8192 bits.
 <br/>In addition, the user can choose from 3 modes, the third of which is the most secure.
 
